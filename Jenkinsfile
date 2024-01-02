@@ -32,5 +32,19 @@ pipeline{
                deploy adapters: [tomcat9(credentialsId: 'jt', path: '', url: 'http://54.91.6.45:8080/')], contextPath: 'jai', war: '**/*.war'
             }
         }
+        stage ('Deployments'){
+            parallel{
+                stage ('Deploy to Staging'){
+                    steps {
+                        sh "scp -i Desktop/main.pem **/*.war jenkins@${params.tomcat_stage}:/usr/share/apache-tomcat-9.0.84/webapps/"
+                    }
+                }
+                stage ("Deploy to Production"){
+                    steps {
+                        sh "scp **/*.war jenkins@${params.tomcat_prod}:/usr/share/apache-tomcat-9.0.84/webapps/"
+                    }
+                }
+            }
+        }
     }
 }
