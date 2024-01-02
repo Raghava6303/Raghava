@@ -35,8 +35,12 @@ pipeline{
         stage('deploy to tomcat-developer'){
             steps{
                 input {
-                    message "do you want to deploy in developer"
-                    ok "YES"
+                    message 'do you want to deploy in developer'
+                    id 't-dev'
+                    ok 'YES'
+                    submitter 'YES'
+                }
+                steps{
                     if(input == 'YES') {
                         deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://34.239.144.208:8080/')], contextPath: 't-test', war: '**/*.war'
                     }
@@ -48,3 +52,4 @@ pipeline{
         }
     }
 }
+
