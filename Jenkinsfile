@@ -37,10 +37,6 @@ pipeline{
             id '1'
             ok 'YES'
             submitterParameter 'YES'
-        }
-
-        
-            }
-        }
+        }    
     }
 }
