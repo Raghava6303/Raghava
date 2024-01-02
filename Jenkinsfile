@@ -35,7 +35,7 @@ pipeline{
         stage('deploy to tomcat-developer'){
             steps{
                 input (
-                    message "do you want to deploy in developer"
+                    message 'do you want to deploy in developer'
                     id 't-dev'
                     ok 'YES'
                     submitter 'YES'
