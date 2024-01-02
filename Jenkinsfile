@@ -32,6 +32,9 @@ pipeline{
                deploy adapters: [tomcat9(credentialsId: 'jt', path: '', url: 'http://54.91.6.45:8080/')], contextPath: 'jai', war: '**/*.war'
             }
         }
+        parameters {
+            choice choices: ['True'], description: 'deploy to tomcat test', name: 'tomcat test'
+        }
         stage ('Deployments'){
             parallel{
                 stage ('Deploy to Staging'){
