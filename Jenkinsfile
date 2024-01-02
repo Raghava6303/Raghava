@@ -32,11 +32,13 @@ pipeline{
                deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://3.85.33.37:8080/')], contextPath: 't-dev', war: '**/*.war'
             }
         }
-        input {
-            message 'do you want to deploy to devloper'
-            id '1'
-            ok 'YES'
-            submitterParameter 'YES'
-        }    
+        parameters{
+            input {
+                message 'do you want to deploy to devloper'
+                id '1'
+                ok 'YES'
+                submitterParameter 'YES'
+            }  
+        }
     }
 }
