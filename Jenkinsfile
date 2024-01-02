@@ -35,10 +35,10 @@ pipeline{
         stage('deploy to tomcat-developer'){
             steps{
                 input (
-                    message 'do you want to deploy in developer'
-                    id 't-dev'
-                    ok 'YES'
-                    submitter 'YES'
+                    message: 'do you want to deploy in developer'
+                    id: 't-dev'
+                    ok: 'YES'
+                    submitter: 'YES'
                 )
                 steps{
                     if(input == 'YES') {
