@@ -40,13 +40,11 @@ pipeline{
                     ok: 'YES',
                     submitter: 'YES'
                 )
-                steps{
-                    if(input == 'YES') {
-                        deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://34.239.144.208:8080/')], contextPath: 't-test', war: '**/*.war'
-                    }
-                     else{
-                        echo ("ABORT")
-                     }
+                if(input == 'YES') {
+                    deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://34.239.144.208:8080/')], contextPath: 't-test', war: '**/*.war'
+                }
+                else{
+                    echo ("ABORT")
                 }
             }
         }
