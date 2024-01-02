@@ -29,24 +29,17 @@ pipeline{
         }  
         stage('deploy to tomcat'){
             steps{
-               deploy adapters: [tomcat9(credentialsId: 'jt', path: '', url: 'http://54.91.6.45:8080/')], contextPath: 'jai', war: '**/*.war'
+               deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://3.85.33.37:8080/')], contextPath: 't-dev', war: '**/*.war'
             }
         }
-        parameters {
-            choice choices: ['True'], description: 'deploy to tomcat test', name: 'tomcat test'
+        input {
+            message 'do you want to deploy to devloper'
+            id '1'
+            ok 'YES'
+            submitterParameter 'YES'
         }
-        stage ('Deployments'){
-            parallel{
-                stage ('Deploy to Staging'){
-                    steps {
-                        sh "scp -i Desktop/main.pem **/*.war jenkins@${params.tomcat_stage}:/usr/share/apache-tomcat-9.0.84/webapps/"
-                    }
-                }
-                stage ("Deploy to Production"){
-                    steps {
-                        sh "scp **/*.war jenkins@${params.tomcat_prod}:/usr/share/apache-tomcat-9.0.84/webapps/"
-                    }
-                }
+
+        
             }
         }
     }
