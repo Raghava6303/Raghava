@@ -27,12 +27,12 @@ pipeline{
                 sh 'mvn package'
             }
         }  
-        stage('deploy to tomcat'){
+        stage('deploy to tomcat-developer'){
             steps{
                deploy adapters: [tomcat9(credentialsId: 't-dev', path: '', url: 'http://3.85.33.37:8080/')], contextPath: 't-dev', war: '**/*.war'
             }
         }
-        stage('deploy to tomcat-developer'){
+        stage('deploy to tomcat-test'){
             steps{
                 script {
                     def A = input (
@@ -50,7 +50,7 @@ pipeline{
                 }
             }
         }
-        stage('deploy to tomcat-test'){
+        stage('deploy to tomcat-PRE-PRD'){
             steps{
                 script {
                     def B = input (
@@ -68,7 +68,7 @@ pipeline{
                 }
             }
         }
-        stage('deploy to tomcat-PRE-PROD'){
+        stage('deploy to tomcat-PROD'){
             steps{
                 script {
                     def A = input (
